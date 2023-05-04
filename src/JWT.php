@@ -435,7 +435,8 @@ class JWT
             return $keyOrKeyArray;
         }
 
-        if (empty($kid)) {
+        if (!isset($keyOrKeyArray[$kid]) && empty($kid)) {
+            // Skip empty check if there is a key for the kid available
             throw new UnexpectedValueException('"kid" empty, unable to lookup correct key');
         }
 
